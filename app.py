@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
+from func import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -7,10 +8,10 @@ api = Api(app)
 class Show_Status(Resource):
 	def get(self):
 		stat = {
-			"A" : "green",
-			"B" : "green",
-			"C" : "green",
-			"D" : "green"
+			"Tenants" : check_stat(tenant_services),
+			"Authentication" : check_stat(auth),
+			"Platform" : check_stat(platform),
+			"Dependencies" : check_stat(dependencies)
 			}
 		return {"status": stat }
 
